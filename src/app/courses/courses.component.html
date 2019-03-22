@@ -1,0 +1,29 @@
+<div class="super_container">
+	<div class="home">
+          <div class="hero_slide_background" style="background-image:url(assets/images/courses_background.jpg)"></div>
+          <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+            <div class="hero_slide_content text-center">
+              <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Découvrez les <span>Modules</span> !</h1>
+            </div>
+          </div>
+	</div>
+	<div class="popular page_section">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title text-center">
+						<h1>Les cours SENTINELLES</h1>
+					</div>
+				</div>
+			</div>
+
+			<div class="row course_boxes" style="align-items: center; justify-content: center;">
+
+				<div *ngFor="let item of courses" class="col-lg-4 course_box">
+					<app-course-box [course]="item"></app-course-box>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

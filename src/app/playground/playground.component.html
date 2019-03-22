@@ -1,0 +1,93 @@
+<div class="home">
+	<div class="home_background_container prlx_parent">
+		<div class="home_background prlx" style="background-image:url(assets/images/courses_background.jpg)"></div>
+	</div>
+	<div class="home_content">
+		<h1>Playground</h1>
+	</div>
+</div>
+<div class="playground">
+	<div class="container">
+		<div class="row">			
+			<div class="col-lg-12">
+				<div class="about" style="margin-bottom:45px;">
+					<div class="about_title">Chapitre : {{chapter.title}}</div>
+					<div class="playground_info">
+						<ul>
+							<li class="playground_info_item">
+								<div class="playground_info_icon">
+									<img src="assets/images/placeholder.svg" alt="https://www.flaticon.com/authors/lucy-g">
+								</div>
+								Nombre d'exercices : {{exercises.length}}
+							</li>
+							<li class="playground_info_item">
+								<div class="playground_info_icon">
+									<img src="assets/images/placeholder.svg" alt="https://www.flaticon.com/authors/lucy-g">
+								</div>
+								Nombre de tests pour l'exercice en cours : {{exercises[cursor].nb_tests}}
+							</li>
+							<li class="playground_info_item">
+								<div class="playground_info_icon">
+									<img src="assets/images/placeholder.svg" alt="https://www.flaticon.com/authors/lucy-g">
+								</div>
+								Nombre de tests sur toute la série : {{playground.nb_tests}}
+							</li>
+						</ul>
+					</div>
+					<div class="playground_info">
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" [style.width]="(playground.nb_success / playground.nb_tests * 100) + '%'" attr.aria-valuenow="{{(playground.nb_success / playground.nb_tests * 100)}}" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="about">
+					<div class="about_title">Instructions</div>
+					<div *ngFor="let i of ranges.get(cursor); let k = index; trackBy: customTrackBy;">
+						<p class="about_text">
+							<i class="fas" [ngClass]="{'fa-question-circle': playground.validations[i] === undefined, 'fa-check-circle': playground.validations[i] !== undefined && playground.validations[i], 'fa-times-circle': playground.validations[i] !== undefined && !playground.validations[i]}"></i>&nbsp;&nbsp;
+							<i [ngStyle]="{'color': playground.validations[i] === undefined ? 'grey' : (playground.validations[i] ? 'green' : 'red')}">{{exercises[cursor].subject_texts[k]}}</i>
+						</p>
+					</div>
+
+					<div class="playground_info">
+						
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-7">
+				
+				<!-- Contact Form -->
+				<div class="playground_form">
+					<div class="playground_title">{{exercises[cursor].order_number}}. {{ (exercises[cursor].title.length > 27) ? (exercises[cursor].title | slice:0:27) + '...':(exercises[cursor].title) }}</div>
+					<div class="playground_form_container">
+						<div *ngFor="let i of ranges.get(cursor); let k = index trackBy: customTrackBy;">
+							<div [innerHTML]="exercises[cursor].previous_codes[k]">
+							</div>
+							<textarea class="text_field playground_form_message"
+								id="answers_{{cursor}}_{{i}}" 
+								name="answers_{{cursor}}_{{i}}"
+								[readonly]="playground.validations[i]"
+								[(ngModel)]="propositions[i].value"></textarea>
+						</div>
+					</div>
+				</div>
+					
+			</div>
+			<div class="col-lg-1" style="padding-top: 70px;">
+             	<button id="playground_send_btn" type="button" class="playground_send_btn trans_200" (click)="prevTest()">Prec.</button>
+            </div>
+			<div class="col-lg-1" style="padding-top: 70px;">
+             	<button id="playground_send_btn" type="button" class="playground_send_btn trans_200" (click)="nextTest()">Suiv.</button>
+			</div>
+
+		</div>
+
+	</div>
+</div>

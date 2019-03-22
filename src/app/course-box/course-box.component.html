@@ -1,0 +1,15 @@
+<!-- Popular Course Item -->
+  <div class="card" *ngIf="course" style="margin: 0 15px; max-width: 315px;">
+    <img class="card-img-top" src="assets/images/courses/{{course.id}}.jpg" alt="{{course.name}}" style="border: 1px solid #ccc; max-width: 315px;" />
+    <div class="card-body text-center">
+      <div class="card-title"><a routerLink="/formations">{{course.name}}</a></div>
+      <div class="card-text">{{course.tags}}</div>
+    </div>
+    <div class="price_box d-flex flex-row align-items-center">
+      <div class="course_author_image">
+        <img src="assets/images/authors/{{course.author_id}}.jpg" alt="{{course.author_name}}" />
+      </div>
+      <div class="course_author_name">{{course.author_name}} <span>Encadrant</span></div>
+      <div class="course_price d-flex flex-column align-items-center justify-content-center"><span>{{course.time_in_hour}} h</span><span *ngIf="course.price_is_public">{{course.price}} &euro;</span></div>
+    </div>
+  </div>
